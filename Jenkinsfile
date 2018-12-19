@@ -27,8 +27,6 @@ pipeline {
         
         steps {
           container('maven') {
-           //check if all versions of activiti-cloud-dependencies are the same
-           sh 'make validate'
            dir("./charts/$APP_NAME") {
 	          sh 'make build'
            }
