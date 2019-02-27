@@ -48,9 +48,13 @@ pipeline {
             sh "echo \$(jx-release-version) > VERSION"
 
             dir("./charts/$APP_NAME") {
-                sh 'make tag'
+		retry(5) {    
+                  sh 'make tag'
+		}
                 sh 'make release'
-                sh 'make github'
+		retry(5) {    
+                  sh 'make github'
+		}
             }
           }
         }
